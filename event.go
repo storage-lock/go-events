@@ -14,6 +14,9 @@ type Event struct {
 	// 事件的唯一ID
 	ID string `json:"id"`
 
+	// 此事件树的树根ID，用于对事件进行聚合分组
+	RootID string `json:"root_id"`
+
 	// 如果此事件拥有父事件，则保留一个指向父事件的引用
 	ParentID string `json:"parent_id"`
 	Parent   *Event `json:"-"`
@@ -54,8 +57,11 @@ type Event struct {
 const EventIDPrefix = "storage-lock-event-"
 
 func NewEvent(lockId string) *Event {
+	id := utils.RandomID(EventIDPrefix)
 	return &Event{
-		ID:        utils.RandomID(EventIDPrefix),
+		ID: id,
+		// 根事件的RootID是它自己
+		RootID:    id,
 		LockId:    lockId,
 		StartTime: pointer.Now(),
 	}
@@ -71,6 +77,7 @@ func (x *Event) End() *Event {
 func (x *Event) Fork() *Event {
 	return &Event{
 		ID:              utils.RandomID(EventIDPrefix),
+		RootID:          x.RootID,
 		ParentID:        x.ID,
 		Parent:          x,
 		LockId:          x.LockId,
@@ -80,6 +87,11 @@ func (x *Event) Fork() *Event {
 		LockInformation: x.LockInformation,
 		Listeners:       x.Listeners,
 	}
+}
+
+func (x *Event) SetRootID(rootID string) *Event {
+	x.RootID = rootID
+	return x
 }
 
 func (x *Event) SetStorageName(storageName string) *Event {
