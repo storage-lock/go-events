@@ -12,20 +12,20 @@ type Action struct {
 	StartTime *time.Time `json:"start_time"`
 	EndTime   *time.Time `json:"end_time"`
 
-	// Action的名字，上面内置了一些，其它的可以自行定义
+	// Action的名字
 	Name string `json:"name"`
 
 	// 执行此Action时发生的错误
 	Err error `json:"err"`
 
 	// action可以携带一些自己单独的上下文信息之类的
-	Payload string `json:"payload"`
+	PayloadMap map[string]any `json:"payload_map"`
 }
 
 func NewAction(name string) *Action {
 	return &Action{
-		StartTime: pointer.Now(),
 		Name:      name,
+		StartTime: pointer.Now(),
 	}
 }
 
@@ -52,7 +52,17 @@ func (x *Action) SetErr(err error) *Action {
 	return x
 }
 
-func (x *Action) SetPayload(payload string) *Action {
-	x.Payload = payload
+func (x *Action) SetPayloadMap(payloadMap map[string]any) *Action {
+	x.PayloadMap = payloadMap
+	return x
+}
+
+func (x *Action) AddPayload(key string, value any) *Action {
+	if x.PayloadMap == nil {
+		x.PayloadMap = make(map[string]any, 0)
+	}
+
+	x.PayloadMap[key] = value
+
 	return x
 }
