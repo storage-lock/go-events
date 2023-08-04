@@ -21,6 +21,9 @@ type Event struct {
 	// 事件可以绑定到一个锁
 	LockId string `json:"lock_id"`
 
+	// 当前的事件是由谁产生的
+	OwnerId string `json:"owner_id"`
+
 	// 事件可以绑定到一个Storage
 	StorageName string `json:"storage_name"`
 
@@ -86,6 +89,11 @@ func (x *Event) SetStorageName(storageName string) *Event {
 
 func (x *Event) SetLockId(lockId string) *Event {
 	x.LockId = lockId
+	return x
+}
+
+func (x *Event) SetOwnerId(ownerId string) *Event {
+	x.OwnerId = ownerId
 	return x
 }
 
