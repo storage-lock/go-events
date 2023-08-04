@@ -2,6 +2,7 @@ package events
 
 import (
 	"context"
+	"encoding/json"
 	"github.com/golang-infrastructure/go-pointer"
 	"github.com/storage-lock/go-storage"
 	"github.com/storage-lock/go-utils"
@@ -205,4 +206,24 @@ func (x *Event) GetParentID() string {
 	}
 
 	return ""
+}
+
+func (x *Event) ToJsonStringE() (string, error) {
+	bytes, err := json.Marshal(x)
+	return string(bytes), err
+}
+
+func (x *Event) ToJsonString() string {
+	s, _ := x.ToJsonStringE()
+	return s
+}
+
+func EventFromJsonStringE(eventJsonString string) (*Event, error) {
+	r := &Event{}
+	err := json.Unmarshal([]byte(eventJsonString), &r)
+	if err != nil {
+		return nil, err
+	} else {
+		return r, nil
+	}
 }
