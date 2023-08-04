@@ -4,7 +4,7 @@ go 1.18
 
 require (
 	github.com/golang-infrastructure/go-pointer v0.0.5
-	github.com/storage-lock/go-storage-lock v0.0.0-20230804114007-1ceaade31a9c
+	github.com/storage-lock/go-storage v0.0.0-20230804144817-27c0f97a198f
 	github.com/storage-lock/go-utils v0.0.0-20230804131655-6dbe431cdc1a
 )
 

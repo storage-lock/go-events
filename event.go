@@ -3,7 +3,7 @@ package events
 import (
 	"context"
 	"github.com/golang-infrastructure/go-pointer"
-	"github.com/storage-lock/go-storage-lock/pkg/storage"
+	"github.com/storage-lock/go-storage"
 	"github.com/storage-lock/go-utils"
 	"time"
 )
