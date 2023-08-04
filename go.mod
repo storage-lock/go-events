@@ -9,11 +9,7 @@ require (
 )
 
 require (
-	github.com/golang-infrastructure/go-cast-anything v0.0.0-20221202061303-86028f8f9f8e // indirect
-	github.com/golang-infrastructure/go-gtypes v0.0.1 // indirect
 	github.com/golang-infrastructure/go-iterator v0.0.0-20230524171120-56988a9b127c // indirect
-	github.com/golang-infrastructure/go-maths v0.0.0-20230110035134-3c905a5d5213 // indirect
 	github.com/golang-infrastructure/go-reflect-utils v0.0.0-20221130143747-965ef2eb09c3 // indirect
 	github.com/google/uuid v1.3.0 // indirect
-	golang.org/x/exp v0.0.0-20230801115018-d63ba01acd4b // indirect
 )

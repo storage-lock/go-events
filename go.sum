@@ -1,12 +1,6 @@
 github.com/davecgh/go-spew v1.1.1 h1:vj9j/u1bqnvCEfJOwUhtlOARqs3+rkHYY13jYWTU97c=
-github.com/golang-infrastructure/go-cast-anything v0.0.0-20221202061303-86028f8f9f8e h1:FF6V8Fx9/x2dtkXaa+fX9Pvl+AAaDfAO+sUv5q6NDqc=
-github.com/golang-infrastructure/go-cast-anything v0.0.0-20221202061303-86028f8f9f8e/go.mod h1:eNUfBCzrMpEre8u3y4GG2YqX0b2mp5lF0YWViuexvbY=
-github.com/golang-infrastructure/go-gtypes v0.0.1 h1:hnM1OYSwLPLGkZ4C6ecAxgmAUaPTjnhnUtRNmJj4p6c=
-github.com/golang-infrastructure/go-gtypes v0.0.1/go.mod h1:vFMCxFzxdMInvTtgLZRlWI1rS+mui88sMbL5I+zu1hg=
 github.com/golang-infrastructure/go-iterator v0.0.0-20230524171120-56988a9b127c h1:h4321AFRVv5rTKcColUjE5pa+Y1exG1e6aEXn43L/Eg=
 github.com/golang-infrastructure/go-iterator v0.0.0-20230524171120-56988a9b127c/go.mod h1:Guf14ZZ7f7qiE0YpZbUkICcm7LWc3nrn3/gDObT//WI=
-github.com/golang-infrastructure/go-maths v0.0.0-20230110035134-3c905a5d5213 h1:l7OSaNJJ5JkLNUIIz7BuaTTo0lBTqcG4QScPOa4DFV0=
-github.com/golang-infrastructure/go-maths v0.0.0-20230110035134-3c905a5d5213/go.mod h1:66VNYnuOFws0n4+Wat/SJM92b7KC7tcD6BmGEB5prBI=
 github.com/golang-infrastructure/go-pointer v0.0.5 h1:wzZ/XnXKzD3DWECTnUpUh+xAlGSWqfn/pQyusPNsqrQ=
 github.com/golang-infrastructure/go-pointer v0.0.5/go.mod h1:SBP0/8QH+mr8LGP/tDo28EQ2b45WqfzjXYbPjmK88g8=
 github.com/golang-infrastructure/go-reflect-utils v0.0.0-20221130143747-965ef2eb09c3 h1:jJ7AdpNdLQudsx1hiXY9iwmauHARV4/UB52KnBh9Se0=
@@ -19,6 +13,4 @@ github.com/storage-lock/go-storage v0.0.0-20230804144817-27c0f97a198f/go.mod h1:
 github.com/storage-lock/go-utils v0.0.0-20230804131655-6dbe431cdc1a h1:6nSZOPYmogTELlp3ZUmzTbOupdrH7OomezDMKHnSAzA=
 github.com/storage-lock/go-utils v0.0.0-20230804131655-6dbe431cdc1a/go.mod h1:V0M52rFAkNt77MA3odRqwkl1xRkswsEcX/neFbgmhZY=
 github.com/stretchr/testify v1.8.1 h1:w7B6lhMri9wdJUVmEZPGGhZzrYTPvgJArz7wNPgYKsk=
-golang.org/x/exp v0.0.0-20230801115018-d63ba01acd4b h1:r+vk0EmXNmekl0S0BascoeeoHk/L7wmaW2QF90K+kYI=
-golang.org/x/exp v0.0.0-20230801115018-d63ba01acd4b/go.mod h1:FXUEEKJgO7OQYeo8N01OfiKP8RXMtf6e8aTskBGqWdc=
 gopkg.in/yaml.v3 v3.0.1 h1:fxVm/GzAzEWqLHuvctI91KS9hhNmmWOoWu0XTYJS7CA=
