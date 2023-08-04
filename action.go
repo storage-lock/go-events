@@ -1,6 +1,7 @@
 package events
 
 import (
+	"errors"
 	"github.com/golang-infrastructure/go-pointer"
 	"time"
 )
@@ -52,6 +53,26 @@ func (x *Action) SetErr(err error) *Action {
 	return x
 }
 
+func (x *Action) ClearErr() *Action {
+	x.Err = nil
+	return x
+}
+
+func (x *Action) GetErrMsg() string {
+	if x.Err != nil {
+		return x.Err.Error()
+	} else {
+		return ""
+	}
+}
+
+func (x *Action) ErrorIs(err error) bool {
+	if x.Err == nil {
+		return false
+	}
+	return errors.Is(x.Err, err)
+}
+
 func (x *Action) SetPayloadMap(payloadMap map[string]any) *Action {
 	x.PayloadMap = payloadMap
 	return x
@@ -65,4 +86,33 @@ func (x *Action) AddPayload(key string, value any) *Action {
 	x.PayloadMap[key] = value
 
 	return x
+}
+
+func (x *Action) ClearPayloadMap() *Action {
+	x.PayloadMap = nil
+	return x
+}
+
+func (x *Action) GetPayloadAsString(key string) string {
+	if x.PayloadMap == nil {
+		return ""
+	}
+	// TODO 2023-8-5 00:51:52 引入cast库
+	v, exists := x.PayloadMap[key]
+	if exists {
+		return v.(string)
+	}
+	return ""
+}
+
+func (x *Action) GetPayloadAsInt(key string) int {
+	if x.PayloadMap == nil {
+		return 0
+	}
+	// TODO 2023-8-5 00:51:52 引入cast库
+	v, exists := x.PayloadMap[key]
+	if exists {
+		return v.(int)
+	}
+	return 0
 }
