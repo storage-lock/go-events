@@ -16,6 +16,7 @@ type Listener interface {
 
 // ------------------------------------------------- --------------------------------------------------------------------
 
+// ListenerWrapper 如果不想声明struct实现Listener接口的话，可以使用这个struct来对函数来包裹函数实现
 type ListenerWrapper struct {
 	name         string
 	listenerFunc func(ctx context.Context, e *Event)
