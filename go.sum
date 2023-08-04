@@ -1,0 +1,16 @@
+github.com/davecgh/go-spew v1.1.1 h1:vj9j/u1bqnvCEfJOwUhtlOARqs3+rkHYY13jYWTU97c=
+github.com/golang-infrastructure/go-iterator v0.0.0-20230524171120-56988a9b127c h1:h4321AFRVv5rTKcColUjE5pa+Y1exG1e6aEXn43L/Eg=
+github.com/golang-infrastructure/go-iterator v0.0.0-20230524171120-56988a9b127c/go.mod h1:Guf14ZZ7f7qiE0YpZbUkICcm7LWc3nrn3/gDObT//WI=
+github.com/golang-infrastructure/go-pointer v0.0.5 h1:wzZ/XnXKzD3DWECTnUpUh+xAlGSWqfn/pQyusPNsqrQ=
+github.com/golang-infrastructure/go-pointer v0.0.5/go.mod h1:SBP0/8QH+mr8LGP/tDo28EQ2b45WqfzjXYbPjmK88g8=
+github.com/golang-infrastructure/go-reflect-utils v0.0.0-20221130143747-965ef2eb09c3 h1:jJ7AdpNdLQudsx1hiXY9iwmauHARV4/UB52KnBh9Se0=
+github.com/golang-infrastructure/go-reflect-utils v0.0.0-20221130143747-965ef2eb09c3/go.mod h1:zqXYxqOBa1mL2ilBK6PuH/Wb/Iego7en6XhiKWdZQHI=
+github.com/google/uuid v1.3.0 h1:t6JiXgmwXMjEs8VusXIJk2BXHsn+wx8BZdTaoZ5fu7I=
+github.com/google/uuid v1.3.0/go.mod h1:TIyPZe4MgqvfeYDBFedMoGGpEw/LqOeaOT+nhxU+yHo=
+github.com/pmezard/go-difflib v1.0.0 h1:4DBwDE0NGyQoBHbLQYPwSUPoCMWR5BEzIk/f1lZbAQM=
+github.com/storage-lock/go-storage-lock v0.0.0-20230804114007-1ceaade31a9c h1:ltShJp1ZbfC+9i59h+lzWLZYhQfZBdfUfaNIpJNWa3Q=
+github.com/storage-lock/go-storage-lock v0.0.0-20230804114007-1ceaade31a9c/go.mod h1:YFQJEPL8CY1GwlRJFNeL8C7bYY5CmYHQfHWfysOyNOg=
+github.com/storage-lock/go-utils v0.0.0-20230804131655-6dbe431cdc1a h1:6nSZOPYmogTELlp3ZUmzTbOupdrH7OomezDMKHnSAzA=
+github.com/storage-lock/go-utils v0.0.0-20230804131655-6dbe431cdc1a/go.mod h1:V0M52rFAkNt77MA3odRqwkl1xRkswsEcX/neFbgmhZY=
+github.com/stretchr/testify v1.8.4 h1:CcVxjf3Q8PM0mHUKJCdn+eZZtm5yQwehR5yeSVQQcUk=
+gopkg.in/yaml.v3 v3.0.1 h1:fxVm/GzAzEWqLHuvctI91KS9hhNmmWOoWu0XTYJS7CA=
