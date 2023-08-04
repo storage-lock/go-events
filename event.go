@@ -186,7 +186,10 @@ func (x *Event) Publish(ctx context.Context, listeners ...Listener) {
 
 // IsRootEvent 此事件是否是最底层的事件，整个事件的fork关系可以看做是一颗树
 func (x *Event) IsRootEvent() bool {
-	return x.Parent == nil && x.ParentID == ""
+	if x.RootID != "" && x.ID != "" && x.RootID == x.ID {
+		return true
+	}
+	return false
 }
 
 func (x *Event) SetParent(event *Event) *Event {
