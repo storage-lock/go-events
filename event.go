@@ -146,10 +146,10 @@ func (x *Event) SetLockInformation(lockInformation *storage.LockInformation) *Ev
 	return x
 }
 
-// Pub Publish的短名称
-func (x *Event) Pub(ctx context.Context, listeners ...Listener) {
-	x.Publish(ctx, listeners...)
-}
+//// Pub Publish的短名称
+//func (x *Event) Pub(ctx context.Context, listeners ...Listener) {
+//	x.Publish(ctx, listeners...)
+//}
 
 // Publish 把当前的事件发布到多个Listener上
 func (x *Event) Publish(ctx context.Context, listeners ...Listener) {
