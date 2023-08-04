@@ -5,19 +5,6 @@ import (
 	"time"
 )
 
-// 用于统计Storage上的方法调用行为
-const (
-	ActionStorageGetName           = "Storage.GetName"
-	ActionStorageInit              = "Storage.Init"
-	ActionStorageUpdateWithVersion = "Storage.UpdateWithVersion"
-	ActionStorageInsertWithVersion = "Storage.InsertWithVersion"
-	ActionStorageDeleteWithVersion = "Storage.DeleteWithVersion"
-	ActionStorageGetTime           = "Storage.GetTime"
-	ActionStorageGet               = "Storage.Get"
-	ActionStorageClose             = "Storage.Close"
-	ActionStorageList              = "Storage.List"
-)
-
 // Action 一个事件可以添加若干个Action，每个Action都会有一些时间、名称、上下文之类的
 type Action struct {
 
