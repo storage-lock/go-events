@@ -120,14 +120,14 @@ func (x *Event) SetErr(err error) *Event {
 	return x
 }
 
-// AppendAction 往事件中追加一个action
-func (x *Event) AppendAction(action *Action) *Event {
+// AddAction 往事件中追加一个action
+func (x *Event) AddAction(action *Action) *Event {
 	x.Actions = append(x.Actions, action)
 	return x
 }
 
-// AppendActionByName 添加Action名，一般用于只需要记录名称和时间不需要记录其它字段的时候
-func (x *Event) AppendActionByName(actionName string) *Event {
+// AddActionByName 添加Action名，一般用于只需要记录名称和时间不需要记录其它字段的时候
+func (x *Event) AddActionByName(actionName string) *Event {
 	x.Actions = append(x.Actions, NewAction(actionName))
 	return x
 }
