@@ -166,7 +166,7 @@ func (x *Event) SetLockInformation(lockInformation *storage.LockInformation) *Ev
 func (x *Event) Publish(ctx context.Context, listeners ...Listener) {
 
 	// 如果要发布的时候没有设置过结束时间，则自动设置
-	if x.EndTime.IsZero() {
+	if x.End() == nil || x.EndTime.IsZero() {
 		x.End()
 	}
 
