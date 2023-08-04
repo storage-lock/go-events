@@ -22,7 +22,8 @@ const (
 type Action struct {
 
 	// Action被创建的时间
-	Time *time.Time `json:"time"`
+	StartTime *time.Time `json:"start_time"`
+	EndTime   *time.Time `json:"end_time"`
 
 	// Action的名字，上面内置了一些，其它的可以自行定义
 	Name string `json:"name"`
@@ -36,14 +37,22 @@ type Action struct {
 
 func NewAction(name string) *Action {
 	return &Action{
-		Time: pointer.Now(),
-		Name: name,
+		StartTime: pointer.Now(),
+		Name:      name,
 	}
 }
 
-func (x *Action) SetTime(time *time.Time) *Action {
-	x.Time = time
+func (x *Action) End() *Action {
+	x.EndTime = pointer.Now()
 	return x
+}
+
+// Cost 计算此Action花费的时间
+func (x *Action) Cost() time.Duration {
+	if x.StartTime == nil || x.EndTime == nil {
+		return 0
+	}
+	return x.EndTime.Sub(*x.StartTime)
 }
 
 func (x *Action) SetName(name string) *Action {
