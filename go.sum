@@ -8,8 +8,8 @@ github.com/golang-infrastructure/go-reflect-utils v0.0.0-20221130143747-965ef2eb
 github.com/google/uuid v1.3.0 h1:t6JiXgmwXMjEs8VusXIJk2BXHsn+wx8BZdTaoZ5fu7I=
 github.com/google/uuid v1.3.0/go.mod h1:TIyPZe4MgqvfeYDBFedMoGGpEw/LqOeaOT+nhxU+yHo=
 github.com/pmezard/go-difflib v1.0.0 h1:4DBwDE0NGyQoBHbLQYPwSUPoCMWR5BEzIk/f1lZbAQM=
-github.com/storage-lock/go-storage v0.0.0-20230804144817-27c0f97a198f h1:C0GvMeEzZtn75wozNdOWCaJOs9gqqpQLJtSAKz3nMl8=
-github.com/storage-lock/go-storage v0.0.0-20230804144817-27c0f97a198f/go.mod h1:rsdEP+Qq+lvkTp6UbXljkznIV09Gh3wWuMjiDSXPgww=
+github.com/storage-lock/go-storage v0.0.0-20230804173446-351fafb1a6ff h1:mb92Dx5lJSTla909XfDASosazgH1XDa2GZ0gFkyejZU=
+github.com/storage-lock/go-storage v0.0.0-20230804173446-351fafb1a6ff/go.mod h1:M7VF0+2ZZ2zqiur8jHXbDELgtrXhXtfvNRFAXEwdayg=
 github.com/storage-lock/go-utils v0.0.0-20230804131655-6dbe431cdc1a h1:6nSZOPYmogTELlp3ZUmzTbOupdrH7OomezDMKHnSAzA=
 github.com/storage-lock/go-utils v0.0.0-20230804131655-6dbe431cdc1a/go.mod h1:V0M52rFAkNt77MA3odRqwkl1xRkswsEcX/neFbgmhZY=
 github.com/stretchr/testify v1.8.1 h1:w7B6lhMri9wdJUVmEZPGGhZzrYTPvgJArz7wNPgYKsk=
