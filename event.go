@@ -131,8 +131,18 @@ func (x *Event) AppendActionByName(actionName string) *Event {
 	return x
 }
 
-func (x *Event) SetEventListeners(listeners []Listener) *Event {
+func (x *Event) SetListeners(listeners []Listener) *Event {
 	x.Listeners = listeners
+	return x
+}
+
+func (x *Event) AddListeners(listener Listener) *Event {
+	x.Listeners = append(x.Listeners, listener)
+	return x
+}
+
+func (x *Event) ClearListeners() *Event {
+	x.Listeners = nil
 	return x
 }
 
