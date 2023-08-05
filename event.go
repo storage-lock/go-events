@@ -3,10 +3,11 @@ package events
 import (
 	"context"
 	"encoding/json"
+	"time"
+
 	"github.com/golang-infrastructure/go-pointer"
 	"github.com/storage-lock/go-storage"
 	"github.com/storage-lock/go-utils"
-	"time"
 )
 
 // Event 表示一个事件
@@ -166,7 +167,7 @@ func (x *Event) SetLockInformation(lockInformation *storage.LockInformation) *Ev
 func (x *Event) Publish(ctx context.Context, listeners ...Listener) {
 
 	// 如果要发布的时候没有设置过结束时间，则自动设置
-	if x.End() == nil || x.EndTime.IsZero() {
+	if x.EndTime == nil || x.EndTime.IsZero() {
 		x.End()
 	}
 
