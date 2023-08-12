@@ -84,6 +84,8 @@ func (x *Event) Fork() *Event {
 		Parent:          x,
 		LockId:          x.LockId,
 		StorageName:     x.StorageName,
+		OwnerId:         x.OwnerId,
+		WatchDogId:      x.WatchDogId,
 		StartTime:       pointer.Now(),
 		EventType:       x.EventType,
 		LockInformation: x.LockInformation,
