@@ -4,7 +4,7 @@ go 1.23
 
 require (
 	github.com/golang-infrastructure/go-pointer v0.0.5
-	github.com/storage-lock/go-storage v0.0.1
+	github.com/storage-lock/go-storage v0.0.3
 	github.com/storage-lock/go-utils v0.0.2
 )
 
@@ -13,5 +13,3 @@ require (
 	github.com/golang-infrastructure/go-reflect-utils v0.0.0-20221130143747-965ef2eb09c3 // indirect
 	github.com/google/uuid v1.3.0 // indirect
 )
-
-replace github.com/storage-lock/go-storage => ../go-storage
