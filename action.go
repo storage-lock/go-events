@@ -1,8 +1,11 @@
 package events
 
 import (
+	"encoding/json"
 	"errors"
 	"github.com/golang-infrastructure/go-pointer"
+	"math"
+	"strconv"
 	"time"
 )
 
@@ -117,22 +120,117 @@ func (x *Action) GetPayload(key string) (any, bool) {
 	return v, exists
 }
 
-// GetPayloadAsString 从payloadMap中获取value，以string返回
+// GetPayloadAsString 从payloadMap中获取value并以string返回。
+// 对于序列化后常见的字符串、数字和布尔值会转换为其文本表示；
+// 缺少key或值类型不支持时返回空字符串。
 func (x *Action) GetPayloadAsString(key string) string {
-	payload, b := x.GetPayload(key)
-	if !b {
+	payload, ok := x.GetPayload(key)
+	if !ok || payload == nil {
 		return ""
 	}
-	// TODO 2023-8-5 00:51:52 引入cast库
-	return payload.(string)
+	switch value := payload.(type) {
+	case string:
+		return value
+	case json.Number:
+		return value.String()
+	case bool:
+		return strconv.FormatBool(value)
+	case int:
+		return strconv.Itoa(value)
+	case int8:
+		return strconv.FormatInt(int64(value), 10)
+	case int16:
+		return strconv.FormatInt(int64(value), 10)
+	case int32:
+		return strconv.FormatInt(int64(value), 10)
+	case int64:
+		return strconv.FormatInt(value, 10)
+	case uint:
+		return strconv.FormatUint(uint64(value), 10)
+	case uint8:
+		return strconv.FormatUint(uint64(value), 10)
+	case uint16:
+		return strconv.FormatUint(uint64(value), 10)
+	case uint32:
+		return strconv.FormatUint(uint64(value), 10)
+	case uint64:
+		return strconv.FormatUint(value, 10)
+	case float32:
+		return strconv.FormatFloat(float64(value), 'g', -1, 32)
+	case float64:
+		return strconv.FormatFloat(value, 'g', -1, 64)
+	default:
+		return ""
+	}
 }
 
-// GetPayloadAsInt 获取payload作为int返回
+// GetPayloadAsInt 获取payload作为int返回。
+// 支持整数类型和可解析的十进制数字字符串；缺少key、溢出或类型不支持时返回0。
 func (x *Action) GetPayloadAsInt(key string) int {
-	payload, b := x.GetPayload(key)
-	if !b {
+	payload, ok := x.GetPayload(key)
+	if !ok || payload == nil {
 		return 0
 	}
-	// TODO 2023-8-5 00:51:52 引入cast库
-	return payload.(int)
+	switch value := payload.(type) {
+	case int:
+		return value
+	case int8:
+		return int(value)
+	case int16:
+		return int(value)
+	case int32:
+		if int64(int(value)) != int64(value) {
+			return 0
+		}
+		return int(value)
+	case int64:
+		if int64(int(value)) != value {
+			return 0
+		}
+		return int(value)
+	case uint:
+		if uint(int(value)) != value {
+			return 0
+		}
+		return int(value)
+	case uint8:
+		return int(value)
+	case uint16:
+		return int(value)
+	case uint32:
+		if uint64(int(value)) != uint64(value) {
+			return 0
+		}
+		return int(value)
+	case uint64:
+		if int64(int(value)) < 0 || uint64(int(value)) != value {
+			return 0
+		}
+		return int(value)
+	case json.Number:
+		parsed, err := value.Int64()
+		if err == nil {
+			if int64(int(parsed)) != parsed {
+				return 0
+			}
+			return int(parsed)
+		}
+		floating, err := value.Float64()
+		if err != nil || math.IsNaN(floating) || math.IsInf(floating, 0) || math.Trunc(floating) != floating {
+			return 0
+		}
+		intLimit := math.Ldexp(1, strconv.IntSize-1)
+		if floating < -intLimit || floating >= intLimit {
+			return 0
+		}
+		return int(floating)
+	case string:
+		parsed, err := strconv.Atoi(value)
+		if err != nil {
+			return 0
+		}
+		return parsed
+	default:
+		return 0
+	}
 }

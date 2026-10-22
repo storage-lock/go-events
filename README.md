@@ -1,5 +1,7 @@
 # Events
 
+> 要求 Go 1.23 或更高版本。
+
 # 一、这是什么
 
 Storage Lock底层的事件机制，分布式锁算法的大多数操作都会触发事件，通过监听事件可以实现锁的可观测性等等功能，这里只是进行事件机制的基础定义，具体事件触发是在[Storage Lock](https://github.com/storage-lock/go-storage-lock)的分布式锁的各个步骤里。
@@ -7,7 +9,7 @@ Storage Lock底层的事件机制，分布式锁算法的大多数操作都会�
 # 二、安装依赖
 
 ```bash
-go get -u github.com/storage-lock/go-events
+go get github.com/storage-lock/go-events@latest
 ```
 
 # 三、组件介绍
@@ -86,6 +88,42 @@ type Action struct {
 	// action可以携带一些自己单独的上下文信息之类的
 	PayloadMap map[string]any `json:"payload_map"`
 }
+```
+
+## JSON 序列化
+
+`Event.ToJsonStringE()` 会返回编码错误，适合需要可靠处理序列化失败的场景；`ToJsonString()` 为兼容便利方法，编码失败时返回空字符串。`EventFromJsonStringE()` 会返回格式错误。错误字段只持久化 `Error()` 文本，错误的具体类型、包装链和 `errors.Is` 关系不会跨 JSON 保留。旧版本将 error interface 编码成 `{}` 的记录仍可读取，但历史错误文本本身无法恢复。
+
+## EventType
+
+`Event.EventType` 用于标识事件类别，可通过 `EventType.String()` 获取稳定的可读名称：
+
+| 常量 | 值 | String() | 含义 |
+| --- | ---: | --- | --- |
+| `EventTypeUnknown` | 0 | `unknown` | 未指定类型 |
+| `EventTypeCreateLock` | 1 | `create` | 创建锁 |
+| `EventTypeLock` | 2 | `lock` | 获取锁流程 |
+| `EventTypeUnlock` | 3 | `unlock` | 释放锁流程 |
+| `EventTypeWatchDog` | 4 | `watchdog` | 看门狗活动 |
+| `EventTypeExpired` | 5 | `expired` | 锁租约过期或过期记录被接管 |
+| `EventTypeBusy` | 6 | `busy` | 锁正被占用，竞争者等待重试 |
+| `EventTypeRenewed` | 7 | `renewed` | 锁租约续期成功 |
+| `EventTypeLost` | 8 | `lost` | 原持有者确认失去锁所有权 |
+| `EventTypeWaitChanged` | 9 | `wait_changed` | 锁的等待队列发生变化 |
+
+事件类型在 JSON 中以整数保存。已分配的整数值是兼容性契约，后续类型只会追加，不应重排或复用；遇到未知数值时 `String()` 返回 `unknown`。消费者应为未知类型保留兜底处理。`Event.Err` 和 `Action.Err` 在 JSON 中保存为错误消息字符串，反序列化后可读取消息，但原错误类型及 `errors.Is` 关系无法恢复；旧版本产生的空对象错误字段会按无错误处理。
+
+按类型过滤事件的示例：
+
+```go
+listener := events.NewListenerWrapper("lock-events", func(ctx context.Context, e *events.Event) {
+    switch e.EventType {
+    case events.EventTypeBusy:
+        // 记录锁竞争
+    case events.EventTypeLost:
+        // 处理持有权丢失
+    }
+})
 ```
 
 ## Listener

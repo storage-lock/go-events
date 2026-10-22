@@ -1,6 +1,7 @@
 package events
 
 import (
+	"encoding/json"
 	"errors"
 	"testing"
 	"time"
@@ -175,24 +176,70 @@ func TestAction_GetPayload(t *testing.T) {
 
 func TestAction_GetPayloadAsString(t *testing.T) {
 	a := NewAction("foo")
-	// 缺 key 返回空字符串
-	if got := a.GetPayloadAsString("missing"); got != "" {
-		t.Fatalf("expect empty, got %s", got)
+	tests := []struct {
+		key  string
+		want string
+	}{
+		{"missing", ""},
+		{"string", "hello"},
+		{"int", "7"},
+		{"bool", "true"},
+		{"float", "1.5"},
+		{"unsupported", ""},
+		{"nil", ""},
 	}
-	a.AddPayload("s", "hello")
-	if got := a.GetPayloadAsString("s"); got != "hello" {
-		t.Fatalf("expect hello, got %s", got)
+	a.AddPayload("string", "hello").
+		AddPayload("int", 7).
+		AddPayload("bool", true).
+		AddPayload("float", 1.5).
+		AddPayload("unsupported", []int{1}).
+		AddPayload("nil", nil)
+
+	for _, tt := range tests {
+		t.Run(tt.key, func(t *testing.T) {
+			if got := a.GetPayloadAsString(tt.key); got != tt.want {
+				t.Fatalf("GetPayloadAsString(%q) = %q, want %q", tt.key, got, tt.want)
+			}
+		})
 	}
 }
 
 func TestAction_GetPayloadAsInt(t *testing.T) {
 	a := NewAction("foo")
-	// 缺 key 返回 0
-	if got := a.GetPayloadAsInt("missing"); got != 0 {
-		t.Fatalf("expect 0, got %d", got)
+	tests := []struct {
+		key  string
+		want int
+	}{
+		{"missing", 0},
+		{"int", 7},
+		{"int64", 8},
+		{"uint", 9},
+		{"number", 10},
+		{"number_float_int", 12},
+		{"string", 11},
+		{"invalid", 0},
+		{"overflow", 0},
+		{"float", 0},
+		{"unsupported", 0},
+		{"nil", 0},
 	}
-	a.AddPayload("i", 7)
-	if got := a.GetPayloadAsInt("i"); got != 7 {
-		t.Fatalf("expect 7, got %d", got)
+	a.AddPayload("int", 7).
+		AddPayload("int64", int64(8)).
+		AddPayload("uint", uint(9)).
+		AddPayload("number", json.Number("10")).
+		AddPayload("number_float_int", json.Number("12.0")).
+		AddPayload("string", "11").
+		AddPayload("invalid", "not-an-int").
+		AddPayload("overflow", json.Number("9223372036854775808")).
+		AddPayload("float", 1.5).
+		AddPayload("unsupported", []int{1}).
+		AddPayload("nil", nil)
+
+	for _, tt := range tests {
+		t.Run(tt.key, func(t *testing.T) {
+			if got := a.GetPayloadAsInt(tt.key); got != tt.want {
+				t.Fatalf("GetPayloadAsInt(%q) = %d, want %d", tt.key, got, tt.want)
+			}
+		})
 	}
 }
