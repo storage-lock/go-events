@@ -4,7 +4,7 @@ go 1.23
 
 require (
 	github.com/golang-infrastructure/go-pointer v0.0.5
-	github.com/storage-lock/go-storage v0.0.3
+	github.com/storage-lock/go-storage v0.1.0
 	github.com/storage-lock/go-utils v0.0.2
 )
 
